@@ -50,8 +50,8 @@ namespace Utils
 		case 'P': return L"▶";  // 플레이어
 		case '#': return L"■";  // 벽
 		case '.': return L"·";  // 바닥
-		case 'B': return L"◆";  // 적
-		case 'T': return L"◎";  // 목표 지점
+		case 'E': return L"○";  // 적
+		case 'Z': return L"♥";  // 목표 지점
 		default:  return (const wchar_t*)ch; // 그 외는 원래 문자 유지
 		}
 	}

@@ -14,7 +14,7 @@
 SokobanLevel::SokobanLevel()
 {
 	//ReadMapFile("Map.txt");
-	ReadMapFile("Stage1.txt");
+	ReadMapFile("Map_Stage1.txt");
 }
 
 void SokobanLevel::Render()
@@ -99,29 +99,23 @@ void SokobanLevel::ReadMapFile(const char* filename)
 		case '#':
 		case '1':
 			AddActor(new Wall(position));
-			//std::cout << "#";
 			break;
 		case '.':
 			AddActor(new Ground(position));
-			//std::cout << ".";
 			break;
 		case 'p':
-
 			// 땅도 같이 생성.
 			AddActor(new Ground(position));
 
 			// Player 액터 생성.
 			AddActor(new Player(position));
-			//std::cout << "p";
 			break;
-		case 'b':
-
+		case 'e':
 			// 땅도 같이 생성.
 			AddActor(new Ground(position));
 			AddActor(new Box(position));
-			//std::cout << "b";
 			break;
-		case 't':
+		case 'z':
 			AddActor(new Target(position));
 
 			// 목표 점수 증가 처리.
