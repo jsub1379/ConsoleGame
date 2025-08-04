@@ -49,7 +49,7 @@ void Player::Tick(float deltaTime)
 	// 입력처리.
 
 	// 이동 로직 - 이동하기 전에 이동할 위치로 갈 수 있는지 판단 후 이동.
-	if (Input::Get().GetKeyDown(VK_RIGHT))
+	if (Input::Get().GetKey(VK_RIGHT))
 	{
 		// 이동 전에 이동 가능한지 확인.
 		if (canPlayerMoveInterface->CanPlayerMove(
@@ -62,7 +62,7 @@ void Player::Tick(float deltaTime)
 		}
 	}
 
-	if (Input::Get().GetKeyDown(VK_LEFT))
+	if (Input::Get().GetKey(VK_LEFT))
 	{
 		bool result = canPlayerMoveInterface->CanPlayerMove(
 			Position(),
@@ -77,7 +77,7 @@ void Player::Tick(float deltaTime)
 		}
 	}
 
-	if (Input::Get().GetKeyDown(VK_UP))
+	if (Input::Get().GetKey(VK_UP))
 	{
 		if (canPlayerMoveInterface->CanPlayerMove(
 			Position(),
@@ -89,7 +89,7 @@ void Player::Tick(float deltaTime)
 		}
 	}
 
-	if (Input::Get().GetKeyDown(VK_DOWN))
+	if (Input::Get().GetKey(VK_DOWN))
 	{
 		if (canPlayerMoveInterface->CanPlayerMove(
 			Position(),
