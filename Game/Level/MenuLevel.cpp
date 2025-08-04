@@ -72,7 +72,7 @@ void MenuLevel::Render()
 	super::Render();
 
 	// 색상 & 좌표 정리.
-	Utils::SetConsolePosition({ 0, 0 });
+	Utils::SetConsolePosition(Vector2(0, 0));
 	Utils::SetConsoleTextColor(static_cast<WORD>(unselectedColor));
 
 	// 메뉴 제목 출력.

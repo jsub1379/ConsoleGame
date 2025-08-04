@@ -1,6 +1,7 @@
 #include "Actor.h"
 #include "Utils/Utils.h"
 #include "Engine.h"
+#include "Math/Color.h"
 
 #include <Windows.h>
 #include <iostream>
@@ -31,24 +32,14 @@ void Actor::Tick(float deltaTime)
 // 그리기 함수.
 void Actor::Render()
 {
-	// Win32 API.
-	// 커서 위치 이동.
-
-	// 콘솔 출력을 제어하는 핸들 얻어오기.
-	//static HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	// 커서 위치 값 생성.
-	COORD coord;
-	coord.X = (short)position.x;
-	coord.Y = (short)position.y;
 
 	// 커서 이동.
 	//SetConsoleCursorPosition(handle, coord);
-	Utils::SetConsolePosition(coord);
+	Utils::SetConsolePosition(position);
 
 	// 색상 설정.
 	//SetConsoleTextAttribute(handle, (WORD)color);
-	Utils::SetConsoleTextColor(static_cast<WORD>(color));
+	Utils::SetConsoleTextColor(color);
 
 	//유니코드 문자로 변경
 	const wchar_t* outChar = Utils::ConvertToWideChar(image);
@@ -62,16 +53,19 @@ void Actor::Render()
 }	
 void Actor::SetPosition(const Vector2& newPosition)
 {
-	//static HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	//// 같으면 업데이트 안함.
+	//if (position == newPosition)
+	//{
+	//	return;
+	//}
 
-	// 커서 위치 값 생성.
-	COORD coord;
-	coord.X = (short)position.x;
-	coord.Y = (short)position.y;
+	//// 지울 위치 확인.
+	//Vector2 direction = newPosition - position;
+	//position.x = direction.x >= 0 ? position.x : position.x + width - 1;
 
 	// 커서 이동.
 	//SetConsoleCursorPosition(handle, coord);
-	Utils::SetConsolePosition(coord);
+	Utils::SetConsolePosition(position);
 
 	//std::cout << ' ';
 	Utils::PrintWideCharacter(L" ");

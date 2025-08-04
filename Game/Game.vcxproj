@@ -182,6 +182,7 @@
     <ClCompile Include="Actor\Enemy.cpp" />
     <ClCompile Include="Actor\Ground.cpp" />
     <ClCompile Include="Actor\Player.cpp" />
+    <ClCompile Include="Actor\PlayerBullet.cpp" />
     <ClCompile Include="Actor\Target.cpp" />
     <ClCompile Include="Actor\Wall.cpp" />
     <ClCompile Include="Demo\DemoLevel.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="Actor\Enemy.h" />
     <ClInclude Include="Actor\Ground.h" />
     <ClInclude Include="Actor\Player.h" />
+    <ClInclude Include="Actor\PlayerBullet.h" />
     <ClInclude Include="Actor\Target.h" />
     <ClInclude Include="Actor\Wall.h" />
     <ClInclude Include="Demo\DemoLevel.h" />

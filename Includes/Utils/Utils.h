@@ -5,6 +5,9 @@
 #include<fcntl.h>
 #include <io.h>
 
+#include "Math/Vector2.h"
+#include "Math/Color.h"
+
 // 프로젝트에서 다양하게 사용할 유틸리티 함수 모음.
 namespace Utils
 {
@@ -30,6 +33,12 @@ namespace Utils
 		SetConsoleCursorPosition(handle, coord);
 	}
 
+	inline void SetConsolePosition(const Vector2& position)
+	{
+		SetConsolePosition(static_cast<COORD>(position));
+	}
+
+
 	// 콘솔 텍스트 색상 설정 함수.
 	inline void SetConsoleTextColor(WORD color)
 	{
@@ -37,10 +46,17 @@ namespace Utils
 		SetConsoleTextAttribute(handle, color);
 	}
 
+	inline void SetConsoleTextColor(Color color)
+	{
+		SetConsoleTextColor(static_cast<WORD>(color));
+	}
+
+
 	inline void PrintWideCharacter(const wchar_t* character)
 	{
 		_write(_fileno(stdout), character, (unsigned int)wcslen(character) * sizeof(wchar_t));
 	}
+
 
 	//유니코드로 변경하는 함수
 	inline const wchar_t* ConvertToWideChar(char ch)

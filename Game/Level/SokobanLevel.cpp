@@ -23,7 +23,7 @@ void SokobanLevel::Render()
 
 	if (isGameClear)
 	{
-		Utils::SetConsolePosition({ 30, 0 });
+		Utils::SetConsolePosition(Vector2(30, 0));
 		Utils::SetConsoleTextColor(
 			static_cast<WORD>(Color::White)
 		);
