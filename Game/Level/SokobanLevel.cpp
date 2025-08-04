@@ -4,7 +4,7 @@
 #include "Actor/Player.h"
 #include "Actor/Wall.h"
 #include "Actor/Ground.h"
-#include "Actor/Box.h"
+#include "Actor/Enemy.h"
 #include "Actor/Target.h"
 
 #include "Utils/Utils.h"
@@ -113,7 +113,7 @@ void SokobanLevel::ReadMapFile(const char* filename)
 		case 'e':
 			// 땅도 같이 생성.
 			AddActor(new Ground(position));
-			AddActor(new Box(position));
+			AddActor(new Enemy(position));
 			break;
 		case 'z':
 			AddActor(new Target(position));
@@ -142,7 +142,7 @@ bool SokobanLevel::CheckGameClear()
 
 	// 타겟 액터 벡터에 저장.
 	std::vector<Actor*> targetActors;
-	std::vector<Actor*> boxActors;
+	std::vector<Actor*> enemyActors;
 	for (Actor* const actor : actors)
 	{
 		// 타겟 액터인지 확인.
@@ -153,19 +153,19 @@ bool SokobanLevel::CheckGameClear()
 		}
 
 		// 박스 액터인지 확인.
-		if (actor->As<Box>())
+		if (actor->As<Enemy>())
 		{
-			boxActors.emplace_back(actor);
+			enemyActors.emplace_back(actor);
 		}
 	}
 
 	// 박스와 타겟 액터 위치 비교.
 	for (Actor* const targetActor : targetActors)
 	{
-		for (Actor* const boxActor : boxActors)
+		for (Actor* const enemyActor : enemyActors)
 		{
 			// 두 액터의 위치가 같으면 점수 증가 처리.
-			if (targetActor->Position() == boxActor->Position())
+			if (targetActor->Position() == enemyActor->Position())
 			{
 				// 점수 증가.
 				++currentScore;
@@ -187,46 +187,46 @@ bool SokobanLevel::CanPlayerMove(
 	}
 
 	// 박스 처리.
-	std::vector<Box*> boxActors;
+	std::vector<Enemy*> enemyActors;
 	for (Actor* const actor : actors)
 	{
-		Box* box = actor->As<Box>();
-		if (box)
+		Enemy* enemy = actor->As<Enemy>();
+		if (enemy)
 		{
-			boxActors.emplace_back(box);
+			enemyActors.emplace_back(enemy);
 		}
 	}
 
 	// 이동하려는 위치에 박스가 있는지 확인.
-	Box* searchedBox = nullptr;
-	for (Box* const boxActor : boxActors)
+	Enemy* searchedEnemy = nullptr;
+	for (Enemy* const enemyActor : enemyActors)
 	{
 		// 플레이어가 이동하려는 위치와 박스의 위치가 같은지 비교.
-		if (boxActor->Position() == newPosition)
+		if (enemyActor->Position() == newPosition)
 		{
 			// 같은 위치에 있는 박스 저장 후 루프 종료.
-			searchedBox = boxActor;
+			searchedEnemy = enemyActor;
 			break;
 		}
 	}
 
 	// 이동하려는 위치에 박스가 있는 경우 처리.
-	if (searchedBox)
+	if (searchedEnemy)
 	{
 		// #1: 박스를 이동시키려는 위치에 다른 박스가 또 있는지 확인.
 		Vector2 direction = newPosition - playerPosition;
-		Vector2 nextPosition = searchedBox->Position() + direction;
+		Vector2 nextPosition = searchedEnemy->Position() + direction;
 
-		for (Box* const otherBox : boxActors)
+		for (Enemy* const otherEnemy : enemyActors)
 		{
 			// 같은 박스는 건너뛰기.
-			if (otherBox == searchedBox)
+			if (otherEnemy == searchedEnemy)
 			{
 				continue;
 			}
 
 			// 박스를 이동시키려는 위치에 다른 박스가 있는지 확인.
-			if (otherBox->Position() == nextPosition)
+			if (otherEnemy->Position() == nextPosition)
 			{
 				// 플레이어 이동 못함.
 				return false;
@@ -248,7 +248,7 @@ bool SokobanLevel::CanPlayerMove(
 				if (actor->As<Ground>() || actor->As<Target>())
 				{
 					// 박스 이동 처리.
-					searchedBox->SetPosition(nextPosition);
+					searchedEnemy->SetPosition(nextPosition);
 
 					// 게임 클리어 여부 확인.
 					isGameClear = CheckGameClear();

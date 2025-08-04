@@ -1,6 +1,6 @@
-#include "Box.h"
+#include "Enemy.h"
 
-Box::Box(const Vector2& position)
+Enemy::Enemy(const Vector2& position)
 	: Actor('E', Color::Green, position)
 {
 	// 그릴 때 사용할 정렬 순서 설정.
