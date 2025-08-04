@@ -5,6 +5,9 @@
 #include <Windows.h>
 #include <iostream>
 
+//#include<fcntl.h>
+#include <io.h>
+
 Actor::Actor(const char image, Color color, const Vector2& position)
 	: image(image), color(color), position(position)
 {
@@ -47,10 +50,16 @@ void Actor::Render()
 	//SetConsoleTextAttribute(handle, (WORD)color);
 	Utils::SetConsoleTextColor(static_cast<WORD>(color));
 
-	// 그리기.
-	std::cout << image;
-}
+	//유니코드 문자로 변경
+	const wchar_t* outChar = Utils::ConvertToWideChar(image);
 
+	// 그리기.
+	Utils::PrintWideCharacter(outChar);
+	//std::wcout << outChar;
+	
+	//std::cout << image;
+
+}	
 void Actor::SetPosition(const Vector2& newPosition)
 {
 	//static HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -64,7 +73,8 @@ void Actor::SetPosition(const Vector2& newPosition)
 	//SetConsoleCursorPosition(handle, coord);
 	Utils::SetConsolePosition(coord);
 
-	std::cout << ' ';
+	//std::cout << ' ';
+	Utils::PrintWideCharacter(L" ");
 
 	position = newPosition;
 }

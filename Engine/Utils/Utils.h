@@ -1,6 +1,9 @@
 #pragma once
 
 #include <Windows.h>
+#include <iostream>
+#include<fcntl.h>
+#include <io.h>
 
 // 프로젝트에서 다양하게 사용할 유틸리티 함수 모음.
 namespace Utils
@@ -33,4 +36,24 @@ namespace Utils
 		static HANDLE handle = GetConsoleHandle();
 		SetConsoleTextAttribute(handle, color);
 	}
+
+	inline void PrintWideCharacter(const wchar_t* character)
+	{
+		_write(_fileno(stdout), character, (unsigned int)wcslen(character) * sizeof(wchar_t));
+	}
+
+	//유니코드로 변경하는 함수
+	inline const wchar_t* ConvertToWideChar(char ch)
+	{
+		switch (ch)
+		{
+		case 'P': return L"▶";  // 플레이어
+		case '#': return L"■";  // 벽
+		case '.': return L"·";  // 바닥
+		case 'B': return L"◆";  // 적
+		case 'T': return L"◎";  // 목표 지점
+		default:  return (const wchar_t*)ch; // 그 외는 원래 문자 유지
+		}
+	}
+
 }

@@ -10,13 +10,15 @@ struct MenuItem
 	typedef void (*OnSelected)();
 	//using OnSelected = void (*)();
 
-	MenuItem(const char* text, OnSelected onSelected)
+	MenuItem(const wchar_t* text, OnSelected onSelected)
 		: onSelected(onSelected)
 	{
 		// 메뉴 텍스트 문자열 복사.
-		size_t length = strlen(text) + 1;
-		menuText = new char[length];
-		strcpy_s(menuText, length, text);
+		size_t length = wcslen(text) + 1;
+		menuText = new wchar_t[length];
+		wcscpy_s(menuText, length, text);
+
+		menuTextLength = (unsigned int)length - 1;
 	}
 
 	~MenuItem()
@@ -25,7 +27,9 @@ struct MenuItem
 	}
 
 	// 메뉴 텍스트.
-	char* menuText = nullptr;
+	wchar_t* menuText = nullptr;
+
+	unsigned int menuTextLength = 0;
 
 	// 메뉴 선택 시 실행할 동작.
 	OnSelected onSelected = nullptr;

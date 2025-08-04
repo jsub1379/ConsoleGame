@@ -5,16 +5,19 @@
 
 #include <iostream>
 
+#include<fcntl.h>
+#include <io.h>
+
 MenuLevel::MenuLevel()
 {
 	// 메뉴 아이템 추가.
 	items.emplace_back(new MenuItem(
-		"Resume Game",
+		L"Resume Game",
 		[]() { Game::Get().ToggleMenu(); }
 	));
 
 	items.emplace_back(new MenuItem(
-		"Quit Game",
+		L"Quit Game",
 		[]() { Game::Get().Quit(); }
 	));
 
@@ -73,7 +76,9 @@ void MenuLevel::Render()
 	Utils::SetConsoleTextColor(static_cast<WORD>(unselectedColor));
 
 	// 메뉴 제목 출력.
-	std::cout << "SokobanGame\n\n";
+	//std::cout << "SokobanGame\n\n";
+	wchar_t title[] = L"SokobanGame\n\n";
+	Utils::PrintWideCharacter(title);
 
 	// 메뉴 아이템 렌더링.
 	for (int ix = 0; ix < length; ++ix)
@@ -86,6 +91,8 @@ void MenuLevel::Render()
 		Utils::SetConsoleTextColor(static_cast<WORD>(textColor));
 
 		// 메뉴 텍스트 출력.
-		std::cout << items[ix]->menuText << "\n";
+		Utils::PrintWideCharacter(items[ix]->menuText);
+		Utils::PrintWideCharacter(L"\n");
+		//std::cout << items[ix]->menuText << "\n";
 	}
 }

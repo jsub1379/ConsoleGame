@@ -6,6 +6,10 @@
 #include "Utils/Utils.h"
 #include "Input.h"
 
+#include<fcntl.h>
+#include <io.h>
+
+
 // 정적 변수 초기화.
 Engine* Engine::instance = nullptr;
 
@@ -25,6 +29,7 @@ BOOL WINAPI ConsoleMessageProcedure(DWORD CtrlType)
 
 Engine::Engine()
 {
+
 	instance = this;
 
 	// 콘솔 커서 끄기.
@@ -42,6 +47,9 @@ Engine::Engine()
 	
 	// 엔진 설정 로드.
 	LoadEngineSettings();
+
+	// UTF16 모드 설정.
+	int previouseCharacterMove = _setmode(_fileno(stdout), _O_U16TEXT);
 }
 
 Engine::~Engine()
