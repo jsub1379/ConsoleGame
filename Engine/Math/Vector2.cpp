@@ -1,7 +1,7 @@
 #include "Vector2.h"
 #include <iostream>
 
-// 전역 변수 초기화.
+//// 전역 변수 초기화.
 Vector2 Vector2::Zero = Vector2(0, 0);
 Vector2 Vector2::One = Vector2(1, 1);
 Vector2 Vector2::Up = Vector2(0, 1);
@@ -55,15 +55,15 @@ Vector2::operator COORD() const
     return coord;
 }
 
-const char* Vector2::ToString()
-{
-    // "(20, 30)" -> 문자열 조합.
-    if (value != nullptr)
-    {
-        delete[] value;
-    }
-
-    value = new char[1024];
-    sprintf_s(value, 1024, "(%d, %d)", x, y);
-    return value;
-}
+//const char* Vector2::ToString()
+//{
+//    // "(20, 30)" -> 문자열 조합.
+//    if (value != nullptr)
+//    {
+//        delete[] value;
+//    }
+//
+//    value = new char[1024];
+//    sprintf_s(value, 1024, "(%d, %d)", x, y);
+//    return value;
+//}

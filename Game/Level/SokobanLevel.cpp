@@ -13,7 +13,6 @@
 
 SokobanLevel::SokobanLevel()
 {
-	//ReadMapFile("Map.txt");
 	ReadMapFile("Map_Stage1.txt");
 }
 
@@ -32,6 +31,7 @@ void SokobanLevel::Render()
 	}
 }
 
+//맵 및 객체 생성 로직
 void SokobanLevel::ReadMapFile(const char* filename)
 {
 	// 최종 애셋 경로 완성.
@@ -106,7 +106,6 @@ void SokobanLevel::ReadMapFile(const char* filename)
 		case 'p':
 			// 땅도 같이 생성.
 			AddActor(new Ground(position));
-
 			// Player 액터 생성.
 			AddActor(new Player(position));
 			break;
@@ -117,7 +116,6 @@ void SokobanLevel::ReadMapFile(const char* filename)
 			break;
 		case 'z':
 			AddActor(new Target(position));
-
 			// 목표 점수 증가 처리.
 			++targetScore;
 			//std::cout << "t";
@@ -135,6 +133,7 @@ void SokobanLevel::ReadMapFile(const char* filename)
 	fclose(file);
 }
 
+//점수 처리 로직
 bool SokobanLevel::CheckGameClear()
 {
 	// 박스가 타겟 위치에 모두 옮겨졌는지 확인.
@@ -143,6 +142,7 @@ bool SokobanLevel::CheckGameClear()
 	// 타겟 액터 벡터에 저장.
 	std::vector<Actor*> targetActors;
 	std::vector<Actor*> enemyActors;
+
 	for (Actor* const actor : actors)
 	{
 		// 타겟 액터인지 확인.
@@ -176,6 +176,7 @@ bool SokobanLevel::CheckGameClear()
 	return currentScore == targetScore;
 }
 
+//플레이어 이동 가능 여부 처리
 bool SokobanLevel::CanPlayerMove(
 	const Vector2& playerPosition, 
 	const Vector2& newPosition)

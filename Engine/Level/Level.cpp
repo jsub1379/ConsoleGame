@@ -43,6 +43,12 @@ void Level::BeginPlay()
 {
 	for (Actor* const actor : actors)
 	{
+		// 액터 처리 여부 확인.
+		if (!actor->isActive || actor->isExpired)
+		{
+			continue;
+		}
+
 		// 이미 호출된 개체는 건너뛰기.
 		if (actor->HasBeganPlay())
 		{
