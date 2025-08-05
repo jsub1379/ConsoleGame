@@ -18,7 +18,7 @@ public:
 	operator COORD() const;
 
 	// 문자열로 출력.
-	const char* ToString();
+	//const char* ToString();
 
 	static Vector2 Zero;
 	static Vector2 One;

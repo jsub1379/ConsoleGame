@@ -6,6 +6,8 @@
 #include "Level/Level.h"
 #include "Interface/ICanPlayerMove.h"
 
+#include "Actor/PlayerBullet.h"
+
 #include <iostream>
 
 Player::Player(const Vector2& position)
@@ -37,7 +39,7 @@ void Player::Tick(float deltaTime)
 	//Actor::Tick(deltaTime);
 	super::Tick(deltaTime);
 
-	// ESC 종료.
+	// ESC 메뉴 진입.
 	if (Input::Get().GetKeyDown(VK_ESCAPE))
 	{
 		//Engine::Get().Quit();
@@ -99,5 +101,12 @@ void Player::Tick(float deltaTime)
 			position.y += 1;
 			SetPosition(position);
 		}
+	}
+
+	//총알 발사
+	if (Input::Get().GetKeyDown(VK_SPACE))
+	{
+		Vector2 position = Position();
+		owner->AddActor(new PlayerBullet(position));
 	}
 }
