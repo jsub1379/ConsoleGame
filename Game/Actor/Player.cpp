@@ -5,6 +5,7 @@
 #include "Input.h"
 #include "Level/Level.h"
 #include "Interface/ICanPlayerMove.h"
+#include "PLayerBullet.h"
 
 #include <iostream>
 
@@ -100,4 +101,11 @@ void Player::Tick(float deltaTime)
 			SetPosition(position);
 		}
 	}
+
+	if (Input::Get().GetKeyDown(VK_SPACE))
+	{
+		PlayerBullet* bullet = new PlayerBullet(Position() + Vector2(1, 0));
+		GetOwner()->AddActor(bullet);
+	}
+
 }
