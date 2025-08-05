@@ -1,7 +1,7 @@
 #include "Actor.h"
 #include "Utils/Utils.h"
 #include "Engine.h"
-#include "Math/Color.h"
+#include "Level/Level.h"
 
 #include <Windows.h>
 #include <iostream>
@@ -34,11 +34,9 @@ void Actor::Render()
 {
 
 	// 커서 이동.
-	//SetConsoleCursorPosition(handle, coord);
 	Utils::SetConsolePosition(position);
 
 	// 색상 설정.
-	//SetConsoleTextAttribute(handle, (WORD)color);
 	Utils::SetConsoleTextColor(color);
 
 	//유니코드 문자로 변경
@@ -53,21 +51,11 @@ void Actor::Render()
 }	
 void Actor::SetPosition(const Vector2& newPosition)
 {
-	//// 같으면 업데이트 안함.
-	//if (position == newPosition)
-	//{
-	//	return;
-	//}
+	//현재는 이동 관련 설정을 player.h에서 하고 있음
+	//추후에 옮길 예정, 일단 test를 위해 두기
 
-	//// 지울 위치 확인.
-	//Vector2 direction = newPosition - position;
-	//position.x = direction.x >= 0 ? position.x : position.x + width - 1;
-
-	// 커서 이동.
-	//SetConsoleCursorPosition(handle, coord);
 	Utils::SetConsolePosition(position);
 
-	//std::cout << ' ';
 	Utils::PrintWideCharacter(L" ");
 
 	position = newPosition;
@@ -91,6 +79,23 @@ void Actor::SetOwner(Level* newOwner)
 Level* Actor::GetOwner()
 {
 	return owner;
+}
+
+//충돌 처리 로직 필요
+
+void Actor::Destroy()
+{
+	// 중복 삭제 방지 처리.
+	if (isExpired)
+	{
+		return;
+	}
+
+	// 삭제 요청 되었다고 설정.
+	isExpired = true;
+
+	// 레벨에 삭제 요청.
+	owner->DestroyActor(this);
 }
 
 void Actor::QuitGame()

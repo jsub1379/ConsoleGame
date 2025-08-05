@@ -51,10 +51,16 @@ public:
 	void SetOwner(Level* newOwner);
 	Level* GetOwner();
 
+	// 충돌 확인 요청 함수 (간단한 AABB 로직).
+	bool TestIntersect(const Actor* const other);
+
+	// 객체 삭제 함수.
+	void Destroy();
+
 	// 게임 종료 요청 함수.
 	void QuitGame();
 
-private:
+protected:
 	// 개체의 위치.
 	Vector2 position;
 
@@ -69,6 +75,12 @@ private:
 
 	// 정렬 순서.
 	unsigned int sortingOrder = 0;
+
+	// 액터가 활성 상태인지 알려주는 변수.
+	bool isActive = true;
+
+	// 삭제 요청됐는지 알려주는 변수.
+	bool isExpired = false;
 
 	// 소유 레벨(오너십).
 	Level* owner = nullptr;

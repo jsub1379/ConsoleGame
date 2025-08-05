@@ -1,5 +1,7 @@
 #include "Level.h"
 #include "Actor/Actor.h"
+#include "Utils/Utils.h"
+
 
 Level::Level()
 {
@@ -10,13 +12,6 @@ Level::~Level()
 	// 메모리 해제.
 	for (Actor* actor : actors)
 	{
-		// null 확인 후 액터 제거.
-		//if (actor)
-		//{
-		//	// 삭제 및 메모리 정리.
-		//	delete actor;
-		//	actor = nullptr;
-		//}
 
 		SafeDelete(actor);
 	}
@@ -35,6 +30,12 @@ void Level::AddActor(Actor* newActor)
 	
 	// 오너십 설정.
 	newActor->SetOwner(this);
+}
+
+void Level::DestroyActor(Actor* destroyedActor)
+{
+	// 대기 배열에 추가.
+	destroyRequstedActors.emplace_back(destroyedActor);
 }
 
 // 엔진 이벤트 함수.
@@ -56,6 +57,12 @@ void Level::Tick(float deltaTime)
 {
 	for (Actor* const actor : actors)
 	{
+		// 액터 처리 여부 확인.
+		if (!actor->isActive || actor->isExpired)
+		{
+			continue;
+		}
+
 		actor->Tick(deltaTime);
 	}
 }
@@ -101,6 +108,52 @@ void Level::Render()
 		// 드로우 콜.
 		actor->Render();
 	}
+}
+
+void Level::ProcessAddAndDestroyActors()
+{
+	// actors 배열에서 제외 처리.
+	for (auto iterator = actors.begin(); iterator != actors.end();)
+	{
+		// 삭제 요청된 액터인지 확인 후 배열에서 제외
+		if ((*iterator)->isExpired)
+		{
+			// erase 함수를 사용하면 iterator가 무효화되기 때문에
+			// 반환되는 값을 저장해야함.
+			iterator = actors.erase(iterator);
+			continue;
+		}
+
+		++iterator;
+	}
+
+	// destroyRequstedActors 배열을 순회하면서 액터 delete.
+	for (auto* actor : destroyRequstedActors)
+	{
+		// 액터가 그렸던 곳 지우기.
+		Utils::SetConsolePosition(actor->position);
+
+		// 콘솔에 빈문자 출력해서 지우기.
+		// 1x1을 가정해서, 일단 반복문 지웠음
+			Utils::PrintWideCharacter(L" ");
+
+
+		// 리소스 해제.
+		SafeDelete(actor);
+	}
+
+	// 배열 초기화 -> 크기가 0.
+	destroyRequstedActors.clear();
+
+	// addRequstedActors 배열을 순회하면서 새로운 액터 추가.
+	for (auto* const actor : addRequstedActors)
+	{
+		actors.emplace_back(actor);
+		actor->SetOwner(this);
+	}
+
+	// 배열 초기화.
+	addRequstedActors.clear();
 }
 
 void Level::SortActorsBySortingOrder()
