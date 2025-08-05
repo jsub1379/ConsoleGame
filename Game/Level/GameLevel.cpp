@@ -24,6 +24,8 @@ void GameLevel::Render()
 	if (isGameClear)
 	{
 
+		Utils::SetConsolePosition(Vector2(2, 0));
+
 		Utils::SetConsoleTextColor(
 			static_cast<WORD>(Color::White)
 		);
@@ -69,7 +71,7 @@ void GameLevel::ReadMapFile(const char* filename)
 	int size = (int)readSize;
 
 	// x, y 좌표.
-	Vector2 position;
+	Vector2 position(0, 2);
 
 	// 문자 배열 순회.
 	while (index < size)
@@ -255,7 +257,9 @@ void GameLevel::ProcessCollisionPlayerBulletAndEnemy()
 	{
 		if (player->TestIntersect(target))
 		{
-			target->Destroy();
+			//마지막 target 이 아닌 경우
+			if (targetEnemy != 1)
+				target->Destroy();
 
 			if (CheckGameClear())
 				isGameClear = true;
