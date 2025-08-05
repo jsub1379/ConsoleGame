@@ -141,7 +141,7 @@ void Level::ProcessAddAndDestroyActors()
 
 		// 콘솔에 빈문자 출력해서 지우기.
 		// 1x1을 가정해서, 일단 반복문 지웠음
-			Utils::PrintWideCharacter(L" ");
+		Utils::PrintWideCharacter(L"  ");
 
 
 		// 리소스 해제.

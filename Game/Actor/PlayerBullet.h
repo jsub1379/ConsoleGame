@@ -24,7 +24,6 @@ public:
     virtual void Tick(float deltaTime) override;
 
 private:
-    // 인터페이스 참조 변수.
-    class ICanPlayerMove* canPlayerMoveInterface = nullptr;
-    float speed = 70.0f;
+    float speed = 20.0f;
+    float xPosition = 0.0f;
 };

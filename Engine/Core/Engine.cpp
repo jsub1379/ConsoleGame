@@ -107,7 +107,8 @@ void Engine::Run()
 			Tick(deltaTime);
 			Render();
 
-			// 제목에 FPS 출력.
+			// 제목에 FPS 출력load
+// 
 			//char title[50] = { };
 			//sprintf_s(title, 50, "FPS: %f", (1.0f / deltaTime));
 			//SetConsoleTitleA(title);
@@ -117,6 +118,12 @@ void Engine::Run()
 
 			// 현재 프레임의 입력을 기록.
 			input.SavePreviouseKeyStates();
+
+			// 레벨에 추가 및 삭제 요청한 액터 처리.
+			if (mainLevel)
+			{
+				mainLevel->ProcessAddAndDestroyActors();
+			}
 		}
 	}
 

@@ -335,6 +335,7 @@ void SokobanLevel::ProcessCollisionPlayerBulletAndEnemy()
 		if (enemy)
 		{
 			enemies.emplace_back(enemy);
+			continue;
 		}
 
 		Wall* wall = actor->As<Wall>();
@@ -342,12 +343,10 @@ void SokobanLevel::ProcessCollisionPlayerBulletAndEnemy()
 		{
 			walls.emplace_back(wall);
 		}
-
-
 	}
 
 	// 예외처리 (안해도 상황 확인).
-	if (bullets.size() == 0 || enemies.size() == 0)
+	if (bullets.size() == 0 /*|| enemies.size() == 0*/)
 	{
 		return;
 	}
@@ -360,29 +359,33 @@ void SokobanLevel::ProcessCollisionPlayerBulletAndEnemy()
 			// 두 액터가 서로 겹쳤는지 확인.
 			if (bullet->TestIntersect(enemy))
 			{
-				//enemy->Destroy();
+				enemy->Destroy();
 				bullet->Destroy();
 
 				// 점수를 획득했기 때문에 점수 증가 처리해야 함.
 				//score = score + 1;
 				continue;
 			}
-
 		}
 		
-		//for (auto* wall : walls)
-		//{
-		//	// 두 액터가 서로 겹쳤는지 확인.
-		//	if (bullet->TestIntersect(wall))
-		//	{
-		//		//enemy->Destroy();
-		//		bullet->Destroy();
+		for (auto* wall : walls)
+		{
+			//char test[100] = {};
+			//sprintf_s(test, 100, "Collision Test, bulletPos: (%d, %d) | wallPos: (%d, %d), result: %s \n",
+			//	bullet->Position().x, bullet->Position().y, wall->Position().x, wall->Position().y,
+			//	(bullet->TestIntersect(wall) ? "True" : "False"));
+			//OutputDebugStringA(test);
 
-		//		// 점수를 획득했기 때문에 점수 증가 처리해야 함.
-		//		//score = score + 1;
-		//		//continue;
-		//	}
+			// 두 액터가 서로 겹쳤는지 확인.
+			if (bullet->TestIntersect(wall))
+			{
+				//enemy->Destroy();
+				bullet->Destroy();
 
-		//}
+				// 점수를 획득했기 때문에 점수 증가 처리해야 함.
+				//score = score + 1;
+				//continue;
+			}
+		}
 	}
 }
