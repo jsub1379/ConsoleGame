@@ -1,6 +1,6 @@
 #include "Game.h"
 #include "Level/MenuLevel.h"
-#include "Level/SokobanLevel.h"
+#include "Level/GameLevel.h"
 
 Game* Game::instance = nullptr;
 
@@ -9,7 +9,7 @@ Game::Game()
 	instance = this;
 
 	// 메인 레벨 추가.
-	AddLevel(new SokobanLevel());
+	AddLevel(new GameLevel());
 
 	// 메뉴 레벨 생성.
 	menuLevel = new MenuLevel();
