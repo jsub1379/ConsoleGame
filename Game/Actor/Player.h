@@ -2,7 +2,6 @@
 
 #include "Actor/Actor.h"
 
-
 class Player : public Actor
 {
 	RTTI_DECLARATIONS(Player, Actor)
@@ -14,6 +13,10 @@ public:
 	virtual void Tick(float deltaTime) override;
 
 private:
+	float xspeed = 30.0f;
+	float yspeed = xspeed / 2;
+	float xPosition = 0.0f;
+	float yPosition = 0.0f;
 	// 인터페이스 참조 변수.
 	class ICanPlayerMove* canPlayerMoveInterface = nullptr;
 };

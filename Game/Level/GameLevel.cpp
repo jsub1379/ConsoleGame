@@ -14,7 +14,8 @@
 
 GameLevel::GameLevel()
 {
-	ReadMapFile("Map_Stage1.txt");
+	//ReadMapFile("Map_Stage1.txt");
+	ReadMapFile("Map_Base.txt");
 }
 
 void GameLevel::Render()

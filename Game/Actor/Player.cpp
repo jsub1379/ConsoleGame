@@ -15,6 +15,8 @@ Player::Player(const Vector2& position)
 {
 	// 그릴 때 사용할 정렬 순서 설정.
 	SetSortingOrder(3);
+	xPosition = (float)position.x;
+	yPosition = (float)position.y;
 }
 
 void Player::BeginPlay()
@@ -36,14 +38,11 @@ void Player::BeginPlay()
 
 void Player::Tick(float deltaTime)
 {
-	//Actor::Tick(deltaTime);
 	super::Tick(deltaTime);
 
-	// ESC 메뉴 진입.
+	// ESC: 메뉴 진입.
 	if (Input::Get().GetKeyDown(VK_ESCAPE))
 	{
-		//Engine::Get().Quit();
-		//QuitGame();
 		Game::Get().ToggleMenu();
 		return;
 	}
@@ -56,26 +55,21 @@ void Player::Tick(float deltaTime)
 		// 이동 전에 이동 가능한지 확인.
 		if (canPlayerMoveInterface->CanPlayerMove(
 			Position(),
-			Vector2(Position().x + 1, Position().y)))
+			Vector2((int)Position().x + 1, Position().y)))
 		{
-			Vector2 position = Position();
-			position.x += 1;
-			SetPosition(position);
+			xPosition += xspeed * deltaTime;
+			SetPosition(Vector2((int)xPosition, (int)yPosition));
 		}
 	}
 
 	if (Input::Get().GetKey(VK_LEFT))
 	{
-		bool result = canPlayerMoveInterface->CanPlayerMove(
+		if(canPlayerMoveInterface->CanPlayerMove(
 			Position(),
-			Vector2(Position().x - 1, Position().y)
-		);
-
-		if (result)
+			Vector2((int)Position().x - 1, Position().y)))
 		{
-			Vector2 position = Position();
-			position.x -= 1;
-			SetPosition(position);
+			xPosition -= xspeed * deltaTime;
+			SetPosition(Vector2((int)xPosition, (int)yPosition));
 		}
 	}
 
@@ -83,11 +77,10 @@ void Player::Tick(float deltaTime)
 	{
 		if (canPlayerMoveInterface->CanPlayerMove(
 			Position(),
-			Vector2(Position().x, Position().y - 1)))
+			Vector2(Position().x, (int)Position().y - 1)))
 		{
-			Vector2 position = Position();
-			position.y -= 1;
-			SetPosition(position);
+			yPosition -= yspeed * deltaTime;
+			SetPosition(Vector2((int)xPosition, (int)yPosition));
 		}
 	}
 
@@ -95,11 +88,10 @@ void Player::Tick(float deltaTime)
 	{
 		if (canPlayerMoveInterface->CanPlayerMove(
 			Position(),
-			Vector2(Position().x, Position().y + 1)))
+			Vector2(Position().x, (int)Position().y + 1)))
 		{
-			Vector2 position = Position();
-			position.y += 1;
-			SetPosition(position);
+			yPosition += yspeed * deltaTime;
+			SetPosition(Vector2((int)xPosition, (int)yPosition));
 		}
 	}
 

@@ -19,10 +19,6 @@ void PlayerBullet::Tick(float deltaTime)
 
     // 오른쪽으로 이동
     xPosition += speed * deltaTime;
-    
-    //Vector2 position = Position();
-    //position.x += speed * deltaTime;
-    //position.x = (int)xPosition;
     SetPosition(Vector2((int)xPosition, position.y));
 
     // 화면 밖이면 삭제
