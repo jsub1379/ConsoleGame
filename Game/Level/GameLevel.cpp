@@ -22,7 +22,7 @@ void GameLevel::Render()
 {
 	super::Render();
 
-	if (isGameClear)
+	if (isStageClear)
 	{
 
 		Utils::SetConsolePosition(Vector2(2, 0));
@@ -143,7 +143,7 @@ void GameLevel::Tick(float deltaTime)
 
 
 //점수 처리 로직
-bool GameLevel::CheckGameClear()
+bool GameLevel::CheckStageClear()
 {
 	if (targetEnemy == 0)
 		return true;
@@ -157,7 +157,7 @@ bool GameLevel::CanPlayerMove(
 	const Vector2& playerPosition,
 	const Vector2& newPosition)
 {
-	if (isGameClear)
+	if (isStageClear)
 		return false;
 
 	for (Actor* const actor : actors)
@@ -262,8 +262,8 @@ void GameLevel::ProcessCollisionPlayerBulletAndEnemy()
 			if (targetEnemy != 1)
 				target->Destroy();
 
-			if (CheckGameClear())
-				isGameClear = true;
+			if (CheckStageClear())
+				isStageClear = true;
 		}
 	}
 

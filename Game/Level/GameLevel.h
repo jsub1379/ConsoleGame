@@ -24,12 +24,12 @@ private:
 	void ReadMapFile(const char* filename);
 
 	// 게임 클리어 확인하는 함수.
-	bool CheckGameClear();
+	bool CheckStageClear();
 	void ProcessCollisionPlayerBulletAndEnemy();
 private:
 	// 게임 클리어를 위한 점수.
 	int targetEnemy = 0;
 	
 	// 게임 클리어 여부 확인 변수.
-	bool isGameClear = false;
+	bool isStageClear = false;
 };
