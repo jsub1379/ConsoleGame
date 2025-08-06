@@ -11,7 +11,7 @@ EscMenuLevel::EscMenuLevel()
 
 	items.emplace_back(new MenuItem(
 		L"Resume Game",
-		[]() { Game::Get().ToggleMenu(MenuType::ESC_MENU); }
+		[]() { Game::Get().ToggleMenu(MenuType::RETURN_MENU); }
 	));
 
 	items.emplace_back(new MenuItem(

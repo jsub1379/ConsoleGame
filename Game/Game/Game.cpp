@@ -36,13 +36,18 @@ void Game::ToggleMenu(int menu)
 	if (showMenu)
 		//여기서 메뉴 종류 파악
 	{
-		// 게임 레벨을 뒤로 밀기.
+		// 현재 레벨을 뒤로 밀기.
 		backLevel = mainLevel;
 
 		//ESC 메뉴
-		if (menu==MenuType::ESC_MENU)
+		if (menu == MenuType::ESC_MENU)
 		{
 			mainLevel = escmenuLevel;
+		}
+		//게임 레벨로 RETURN 
+		else if (menu == MenuType::RETURN_MENU)
+		{
+			mainLevel = backLevel;
 		}
 		//스테이지 끝난 업데이트 창 메뉴
 		else if (menu == MenuType::UPGRADE_MENU)
@@ -55,11 +60,8 @@ void Game::ToggleMenu(int menu)
 		{
 			mainLevel = menuLevel;
 		}
-	}
-	else
-	{
-		// 게임 레벨을 메인 레벨로 설정.
-		mainLevel = backLevel;
+
+
 	}
 }
 

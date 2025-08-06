@@ -39,7 +39,7 @@ void MenuLevel::Tick(float deltaTime)
 	}
 
 	//메뉴 기능들 구현
-	//메뉴 연 후에 다시 돌아갈 때 사용
+	//메뉴 화면에서 입력
 	if (Input::Get().GetKeyDown(VK_ESCAPE))
 	{
 

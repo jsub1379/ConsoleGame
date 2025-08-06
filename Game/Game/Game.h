@@ -6,6 +6,7 @@
 namespace MenuType
 {
 	const int ESC_MENU = 0;
+	const int RETURN_MENU = 1;
 	const int UPGRADE_MENU = 100;
 }
 
