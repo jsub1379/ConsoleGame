@@ -36,8 +36,8 @@ void GameLevel::Render()
 		std::wcout << L"Stage Clear!";
 
 		//todo: esc 로직 수정
-		Game::Get().ToggleMenu(MenuType::UPGRADE_MENU);
-
+		//Game::Get().ToggleMenu(MenuType::UPGRADE_MENU);
+		Game::Get().GameClear();
 	}
 }
 

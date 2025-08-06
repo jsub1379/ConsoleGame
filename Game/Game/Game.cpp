@@ -11,12 +11,13 @@ Game::Game()
 	instance = this;
 
 	// 메인 레벨 추가.
-	AddLevel(new GameLevel());
+	//AddLevel(new GameLevel());
 
 	// 메뉴 레벨 생성.
-	menuLevel = new MenuLevel();
-	escmenuLevel = new EscMenuLevel();
-	upgrademenuLevel = new UpgradeMenuLevel();
+	//menuLevel = new MenuLevel();
+	//escMenuLevel = new EscMenuLevel();
+	//upgrademenuLevel = new UpgradeMenuLevel();
+	GameStart();
 }
 
 Game::~Game()
@@ -33,60 +34,49 @@ void Game::ToggleMenu(int menu)
 	// 토글 처리.
 	showMenu = !showMenu;
 
+	// 메뉴를 앞에 보여줘야 할 때.
 	if (showMenu)
-		//여기서 메뉴 종류 파악
 	{
-		// 현재 레벨을 뒤로 밀기.
 		backLevel = mainLevel;
-
-		//ESC 메뉴
-		if (menu == MenuType::ESC_MENU)
-		{
-			mainLevel = escmenuLevel;
-		}
-		//게임 레벨로 RETURN 
-		else if (menu == MenuType::RETURN_MENU)
-		{
-			mainLevel = backLevel;
-		}
-		//스테이지 끝난 업데이트 창 메뉴
-		else if (menu == MenuType::UPGRADE_MENU)
-		{
-			mainLevel = upgrademenuLevel;
-		}
-
-		//??
-		else
-		{
-			mainLevel = menuLevel;
-		}
-
-
+		mainLevel = menuLevel;
+	}
+	// 게임 레벨을 앞에 보여줘야 할 때.
+	else
+	{
+		mainLevel = backLevel;
+		backLevel = menuLevel;
 	}
 }
 
 void Game::CleanUp()
 {
-	// 이때는 Engine의 mainLevel이 menuLevel.
-	if (showMenu)
-	{
-		// 게임 레벨 제거.
-		SafeDelete(backLevel);
-		mainLevel = nullptr;
-	}
-	//// mainLevel이 게임 레벨 -> 이때는 Engine에서 하던데로 정리하면 됨.
-	//else
-	//{
-	//
-	//}
-
+	SafeDelete(gameLevel);
 	SafeDelete(menuLevel);
-	SafeDelete(escmenuLevel);
-	SafeDelete(upgrademenuLevel);
+	mainLevel = nullptr;
+
 	Engine::CleanUp();
 }
 
 Game& Game::Get()
 {
 	return *instance;
+}
+
+void Game::GameStart()
+{
+	gameLevel = new GameLevel();
+	menuLevel = new EscMenuLevel();
+	AddLevel(gameLevel);
+}
+
+void Game::GameClear()
+{
+	gameLevel = new UpgradeMenuLevel();
+	ChangeLevel(gameLevel);
+	showMenu = false;
+}
+
+void Game::GameEnd()
+{
+	Quit();
 }

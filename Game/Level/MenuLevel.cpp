@@ -46,7 +46,7 @@ void MenuLevel::Tick(float deltaTime)
 		Game::Get().ToggleMenu(MenuType::ESC_MENU);
 
 		// 메뉴 인덱스 초기화.
-		currentIndex = 0;
+		//currentIndex = 0;
 	}
 
 	

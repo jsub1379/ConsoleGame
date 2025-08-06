@@ -3,6 +3,10 @@
 #include "Engine.h"
 #include <unordered_map>
 
+// 메뉴 레벨 (다시 게임 진행/종료).
+// 게임 레벨
+// 게임 종료 후 레벨 업그레이드 
+
 namespace MenuType
 {
 	const int ESC_MENU = 0;
@@ -24,12 +28,18 @@ public:
 
 	static Game& Get();
 
+	void GameStart();
+	void GameClear();
+	void GameEnd();
+	
+
 private:
 
 	// 메뉴 레벨.
 	Level* menuLevel = nullptr;
-	Level* escmenuLevel = nullptr;
-	Level* upgrademenuLevel = nullptr;
+	//Level* escMenuLevel = nullptr;
+	//Level* upgrademenuLevel = nullptr;
+	Level* gameLevel = nullptr;
 
 	// 화면에 안보이는 레벨.
 	Level* backLevel = nullptr;

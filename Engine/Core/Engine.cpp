@@ -124,6 +124,14 @@ void Engine::Run()
 			{
 				mainLevel->ProcessAddAndDestroyActors();
 			}
+
+			// 레벨 전환 요청 처리.
+			if (hasLevelChangeRequested)
+			{
+				system("cls");
+				hasLevelChangeRequested = false;
+				AddLevel(toChangeLevel);
+			}
 		}
 	}
 
@@ -142,6 +150,12 @@ void Engine::AddLevel(Level* newLevel)
 	}
 
 	mainLevel = newLevel;
+}
+
+void Engine::ChangeLevel(Level* newLevel)
+{
+	hasLevelChangeRequested = true;
+	toChangeLevel = newLevel;
 }
 
 void Engine::CleanUp()
