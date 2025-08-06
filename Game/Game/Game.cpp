@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "Level/MenuLevel.h"
 #include "Level/GameLevel.h"
+#include "Level/EscMenuLevel.h"
 
 Game* Game::instance = nullptr;
 
@@ -13,6 +14,7 @@ Game::Game()
 
 	// 메뉴 레벨 생성.
 	menuLevel = new MenuLevel();
+	escmenuLevel = new EscMenuLevel();
 }
 
 Game::~Game()
@@ -20,7 +22,7 @@ Game::~Game()
 	CleanUp();
 }
 
-void Game::ToggleMenu()
+void Game::ToggleMenu(const char* menuType = " ")
 {
 	// 화면 정리.
 	// clear screen 명령어 실행.
@@ -30,12 +32,20 @@ void Game::ToggleMenu()
 	showMenu = !showMenu;
 
 	if (showMenu)
+		//여기서 메뉴 종류 파악
 	{
 		// 게임 레벨을 뒤로 밀기.
 		backLevel = mainLevel;
 
 		// 메뉴 레벨을 메인 레벨로 설정.
-		mainLevel = menuLevel;
+		if (menuType=="ESC")
+		{
+			mainLevel = escmenuLevel;
+		}
+		else
+		{
+			mainLevel = menuLevel;
+		}
 	}
 	else
 	{
@@ -60,6 +70,7 @@ void Game::CleanUp()
 	//}
 
 	SafeDelete(menuLevel);
+	SafeDelete(escmenuLevel);
 	Engine::CleanUp();
 }
 

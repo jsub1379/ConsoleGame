@@ -43,7 +43,7 @@ void Player::Tick(float deltaTime)
 	// ESC: 메뉴 진입.
 	if (Input::Get().GetKeyDown(VK_ESCAPE))
 	{
-		Game::Get().ToggleMenu();
+		Game::Get().ToggleMenu("ESC");
 		return;
 	}
 

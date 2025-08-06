@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Engine.h"
+#include <unordered_map>
 
 class Level;
 class Game : public Engine
@@ -10,7 +11,7 @@ public:
 	~Game();
 
 	// 메뉴 전환 함수.
-	void ToggleMenu();
+	void ToggleMenu(const char* menuType);
 
 	virtual void CleanUp() override;
 
@@ -20,6 +21,7 @@ private:
 
 	// 메뉴 레벨.
 	Level* menuLevel = nullptr;
+	Level* escmenuLevel = nullptr;
 
 	// 화면에 안보이는 레벨.
 	Level* backLevel = nullptr;

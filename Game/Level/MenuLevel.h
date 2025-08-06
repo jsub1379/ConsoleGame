@@ -44,9 +44,9 @@ public:
 	~MenuLevel();
 
 	virtual void Tick(float deltaTime) override;
-	virtual  void Render() override;
+	virtual void Render() override;
 
-private:
+protected:
 
 	// 현재 선택된 아이템의 인덱스.
 	int currentIndex = 0;

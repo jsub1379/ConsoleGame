@@ -42,13 +42,16 @@
     <ClCompile Include="Game\Game.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Level\MenuLevel.cpp">
+    <ClCompile Include="Level\EscMenuLevel.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Level\GameLevel.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Actor\PlayerBullet.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Level\MenuLevel.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,13 +83,16 @@
     <ClInclude Include="Interface\ICanPlayerMove.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Level\MenuLevel.h">
+    <ClInclude Include="Level\EscMenuLevel.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Level\GameLevel.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Actor\PlayerBullet.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\MenuLevel.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

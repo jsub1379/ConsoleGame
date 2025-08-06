@@ -10,29 +10,29 @@
 
 MenuLevel::MenuLevel()
 {
-	// 메뉴 아이템 추가.
-	items.emplace_back(new MenuItem(
-		L"Resume Game",
-		[]() { Game::Get().ToggleMenu(); }
-	));
+	//// 메뉴 아이템 추가.
+	//items.emplace_back(new MenuItem(
+	//	L"Resume Game",
+	//	[]() { Game::Get().ToggleMenu(); }
+	//));
 
-	items.emplace_back(new MenuItem(
-		L"Quit Game",
-		[]() { Game::Get().Quit(); }
-	));
+	//items.emplace_back(new MenuItem(
+	//	L"Quit Game",
+	//	[]() { Game::Get().Quit(); }
+	//));
 
-	// 아이템 수 미리 저장.
-	length = static_cast<int>(items.size());
+	//// 아이템 수 미리 저장.
+	//length = static_cast<int>(items.size());
 }
 
 MenuLevel::~MenuLevel()
 {
-	for (MenuItem* item : items)
-	{
-		SafeDelete(item);
-	}
+	//for (MenuItem* item : items)
+	//{
+	//	SafeDelete(item);
+	//}
 
-	items.clear();
+	//items.clear();
 }
 
 void MenuLevel::Tick(float deltaTime)
@@ -59,8 +59,9 @@ void MenuLevel::Tick(float deltaTime)
 
 	if (Input::Get().GetKeyDown(VK_ESCAPE))
 	{
+
 		// Game에 토글 메뉴 기능 추가후 호출해야 함.
-		Game::Get().ToggleMenu();
+		Game::Get().ToggleMenu("ESC");
 
 		// 메뉴 인덱스 초기화.
 		currentIndex = 0;
