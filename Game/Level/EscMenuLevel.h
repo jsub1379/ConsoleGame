@@ -7,12 +7,6 @@ class EscMenuLevel : public MenuLevel
 
 public:
     EscMenuLevel();
-    //virtual ~EscMenuLevel() = default;
     ~EscMenuLevel();
 
-    //virtual void BeginPlay() override;
-    //virtual void Tick(float deltaTime) override;
-
-protected:
-    //virtual void OnMenuAction(int selectedIndex) override;
 };

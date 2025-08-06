@@ -1,5 +1,6 @@
 #include "GameLevel.h"
 #include "Math/Vector2.h"
+#include "Game/Game.h"
 
 #include "Actor/Player.h"
 #include "Actor/Wall.h"
@@ -14,15 +15,16 @@
 
 GameLevel::GameLevel()
 {
-	//ReadMapFile("Map_Stage1.txt");
-	ReadMapFile("Map_Base.txt");
+	ReadMapFile("Map_Stage1.txt");
+	//ReadMapFile("Map_Base.txt");
 }
 
 void GameLevel::Render()
 {
 	super::Render();
 
-	if (isGameClear)
+	//스테이지 클리어 시
+	if (checkStageClear())
 	{
 
 		Utils::SetConsolePosition(Vector2(2, 0));
@@ -31,7 +33,11 @@ void GameLevel::Render()
 			static_cast<WORD>(Color::White)
 		);
 
-		std::wcout << L"Game Clear!";
+		std::wcout << L"Stage Clear!";
+
+		//todo: 업그레이드	부분 구현
+		Game::Get().ToggleMenu(MenuType::UPGRADE_MENU);
+
 	}
 }
 
@@ -143,7 +149,7 @@ void GameLevel::Tick(float deltaTime)
 
 
 //점수 처리 로직
-bool GameLevel::CheckGameClear()
+bool GameLevel::checkStageClear()
 {
 	if (targetEnemy == 0)
 		return true;
@@ -157,7 +163,7 @@ bool GameLevel::CanPlayerMove(
 	const Vector2& playerPosition,
 	const Vector2& newPosition)
 {
-	if (isGameClear)
+	if (checkStageClear())
 		return false;
 
 	for (Actor* const actor : actors)
@@ -262,8 +268,8 @@ void GameLevel::ProcessCollisionPlayerBulletAndEnemy()
 			if (targetEnemy != 1)
 				target->Destroy();
 
-			if (CheckGameClear())
-				isGameClear = true;
+			if (checkStageClear())
+				isStageClear = true;
 		}
 	}
 

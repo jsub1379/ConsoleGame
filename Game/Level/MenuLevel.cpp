@@ -10,29 +10,10 @@
 
 MenuLevel::MenuLevel()
 {
-	//// 메뉴 아이템 추가.
-	//items.emplace_back(new MenuItem(
-	//	L"Resume Game",
-	//	[]() { Game::Get().ToggleMenu(); }
-	//));
-
-	//items.emplace_back(new MenuItem(
-	//	L"Quit Game",
-	//	[]() { Game::Get().Quit(); }
-	//));
-
-	//// 아이템 수 미리 저장.
-	//length = static_cast<int>(items.size());
 }
 
 MenuLevel::~MenuLevel()
 {
-	//for (MenuItem* item : items)
-	//{
-	//	SafeDelete(item);
-	//}
-
-	//items.clear();
 }
 
 void MenuLevel::Tick(float deltaTime)
@@ -57,15 +38,19 @@ void MenuLevel::Tick(float deltaTime)
 		items[currentIndex]->onSelected();
 	}
 
+	//메뉴 기능들 구현
+	//메뉴 연 후에 다시 돌아갈 때 사용
 	if (Input::Get().GetKeyDown(VK_ESCAPE))
 	{
 
-		// Game에 토글 메뉴 기능 추가후 호출해야 함.
-		Game::Get().ToggleMenu("ESC");
+		Game::Get().ToggleMenu(MenuType::ESC_MENU);
 
 		// 메뉴 인덱스 초기화.
 		currentIndex = 0;
 	}
+
+	
+
 }
 
 void MenuLevel::Render()
@@ -75,6 +60,8 @@ void MenuLevel::Render()
 	// 색상 & 좌표 정리.
 	Utils::SetConsolePosition(Vector2(0, 0));
 	Utils::SetConsoleTextColor(static_cast<WORD>(unselectedColor));
+
+	//todo: SokobanGame 출력 escmenu로 옮기기
 
 	// 메뉴 제목 출력.
 	//std::cout << "SokobanGame\n\n";

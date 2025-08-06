@@ -1,29 +1,32 @@
-#include "EscMenuLevel.h"
+#include "UpgradeMenuLevel.h"
 #include "Game/Game.h"
 #include "Utils/Utils.h"
 #include "Input.h"
 
 
-EscMenuLevel::EscMenuLevel()
+UpgradeMenuLevel::UpgradeMenuLevel()
 {
 	// 메뉴 아이템 추가.
-	//esc를 누른 경우에 하는 작동 구현
+	//스테이지가 끝난 경우에 하는 작동 구현
 
 	items.emplace_back(new MenuItem(
-		L"Resume Game",
-		[]() { Game::Get().ToggleMenu(MenuType::ESC_MENU); }
+		L"Upgrade speed",
+		[]() { /*작동부 구현*/ }
 	));
 
 	items.emplace_back(new MenuItem(
-		L"Quit Game",
-		[]() { Game::Get().Quit(); }
+		L"Upgrade damage",
+		[]() {/*작동부 구현*/ }
 	));
 
 	// 아이템 수 미리 저장.
 	length = static_cast<int>(items.size());
+
+
+
 }
 
-EscMenuLevel::~EscMenuLevel()
+UpgradeMenuLevel::~UpgradeMenuLevel()
 {
 	for (MenuItem* item : items)
 	{
