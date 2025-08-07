@@ -60,7 +60,9 @@ void Player::Tick(float deltaTime)
 		{
 			xPosition += xspeed * deltaTime;
 			SetPosition(Vector2((int)xPosition, (int)yPosition));
+			
 			image = '>';
+			SetDirection(Vector2::Right);
 		}
 	}
 
@@ -73,6 +75,7 @@ void Player::Tick(float deltaTime)
 			xPosition -= xspeed * deltaTime;
 			SetPosition(Vector2((int)xPosition, (int)yPosition));
 			image = '<';
+			SetDirection(Vector2::Left);
 		}
 	}
 
@@ -85,6 +88,7 @@ void Player::Tick(float deltaTime)
 			yPosition -= yspeed * deltaTime;
 			SetPosition(Vector2((int)xPosition, (int)yPosition));
 			image = '^';
+			SetDirection(Vector2::Up);
 		}
 	}
 
@@ -97,13 +101,17 @@ void Player::Tick(float deltaTime)
 			yPosition += yspeed * deltaTime;
 			SetPosition(Vector2((int)xPosition, (int)yPosition));
 			image = 'v';
+			SetDirection(Vector2::Down);
 		}
 	}
 
 	//총알 발사
 	if (Input::Get().GetKeyDown(VK_SPACE))
 	{
+		//todo:시작하자마자 위치에서 쏘면 오류
 		Vector2 position = Position();
-		owner->AddActor(new PlayerBullet(position));
+		Vector2 direction = Direction();
+
+		owner->AddActor(new PlayerBullet(position,direction));
 	}
 }

@@ -72,7 +72,8 @@ namespace Utils
 		case '.': return L"·";  // 바닥
 		case 'E': return L"○";  // 적
 		case 'Z': return L"♥";  // 목표 지점
-		case '-': return L"--";
+		case '-': return L"-";
+		case '|': return L"|";
 		default:  return (const wchar_t*)ch; // 그 외는 원래 문자 유지
 		}
 	}

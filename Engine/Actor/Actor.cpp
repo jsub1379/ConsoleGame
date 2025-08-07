@@ -68,6 +68,16 @@ Vector2 Actor::Position() const
 	return position;
 }
 
+void Actor::SetDirection(const Vector2& newDirection)
+{
+	direction = newDirection;
+}
+
+Vector2 Actor::Direction() const
+{
+	return direction;
+}
+
 void Actor::SetSortingOrder(unsigned int sortingOrder)
 {
 	this->sortingOrder = sortingOrder;
@@ -135,3 +145,4 @@ void Actor::QuitGame()
 {
 	Engine::Get().Quit();
 }
+

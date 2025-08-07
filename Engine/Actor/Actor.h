@@ -4,7 +4,6 @@
 #include "Math/Vector2.h"
 #include "RTTI.h"
 #include "Math/Color.h"
-
 // 물체 뭘해야할까?를 정의.
 // 위치 점령.
 // 콘솔 창에 그리기(How?What?).
@@ -44,6 +43,10 @@ public:
 	void SetPosition(const Vector2& newPosition);
 	Vector2 Position() const;
 
+	//방향 설정/값 읽는 함수
+	void SetDirection(const Vector2& newDirection);
+	Vector2 Direction() const;
+
 	// Sorting Order 설정.
 	void SetSortingOrder(unsigned int sortingOrder);
 
@@ -60,12 +63,13 @@ public:
 	// 게임 종료 요청 함수.
 	void QuitGame();
 
+
 protected:
 	// 개체의 위치.
 	Vector2 position;
 
-	//개체의 방향
-	
+	// 개체의 방향
+	Vector2 direction;
 
 	// 그릴 값.
 	char image = ' ';
