@@ -119,11 +119,12 @@ void GameLevel::ReadMapFile(const char* filename)
 			// 땅도 같이 생성.
 			AddActor(new Ground(position));
 			AddActor(new Enemy(position));
+			++enemyNum;
 			break;
 		case 'z':
 			AddActor(new Target(position));
 			// 목표 점수 증가 처리.
-			++targetEnemy;
+			++targetNum;
 			//std::cout << "t";
 			break;
 		}
@@ -153,7 +154,7 @@ void GameLevel::Tick(float deltaTime)
 //점수 처리 로직
 bool GameLevel::checkStageClear()
 {
-	if (targetEnemy == 0)
+	if (targetNum == 0)
 		return true;
 	else
 		return false;
@@ -252,7 +253,7 @@ void GameLevel::ProcessCollisionPlayerBulletAndEnemy()
 			{
 				bullet->Destroy();
 				enemy->Destroy();
-				--targetEnemy;
+				--enemyNum;
 				continue;
 			}
 		}
@@ -266,9 +267,14 @@ void GameLevel::ProcessCollisionPlayerBulletAndEnemy()
 	{
 		if (player->TestIntersect(target))
 		{
-			//마지막 target 이 아닌 경우
-			if (targetEnemy != 1)
+			//적이 다 죽지 않았는데 마지막 target을 먹으려고 하는 경우
+			if (enemyNum != 0 && targetNum == 1)
+				continue;
+			else
+			{
 				target->Destroy();
+				--targetNum;
+			}
 
 			if (checkStageClear())
 				isStageClear = true;
