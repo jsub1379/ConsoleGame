@@ -4,6 +4,7 @@
 #include "Level/EscMenuLevel.h"
 #include "Level/UpgradeMenuLevel.h"
 
+
 Game* Game::instance = nullptr;
 
 Game::Game()
@@ -17,6 +18,7 @@ Game::Game()
 	//menuLevel = new MenuLevel();
 	//escMenuLevel = new EscMenuLevel();
 	//upgrademenuLevel = new UpgradeMenuLevel();
+	currentStageIndex = 1;
 	GameStart();
 }
 
@@ -64,12 +66,13 @@ Game& Game::Get()
 
 void Game::GameStart()
 {
+
 	gameLevel = new GameLevel();
 	menuLevel = new EscMenuLevel();
 	AddLevel(gameLevel);
 }
 
-void Game::GameClear()
+void Game::StageClear()
 {
 	gameLevel = new UpgradeMenuLevel();
 	ChangeLevel(gameLevel);
@@ -79,4 +82,14 @@ void Game::GameClear()
 void Game::GameEnd()
 {
 	Quit();
+}
+
+//다음 스테이지로 넘어가는 함수
+void Game::MoveToNextStage()
+{
+	SetStageIndex();
+	gameLevel = new GameLevel();
+	ChangeLevel(gameLevel);
+	showMenu = false;
+
 }

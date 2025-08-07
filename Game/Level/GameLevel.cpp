@@ -15,8 +15,10 @@
 
 GameLevel::GameLevel()
 {
-	ReadMapFile("Map_Stage1.txt");
-	//ReadMapFile("Map_Base.txt");
+	int index = Game::Get().GetStageIndex();
+	char stageName[32];
+	sprintf_s(stageName, "Map_Stage%d.txt", index);
+	ReadMapFile(stageName);
 }
 
 void GameLevel::Render()
@@ -37,7 +39,7 @@ void GameLevel::Render()
 
 		//todo: esc 로직 수정
 		//Game::Get().ToggleMenu(MenuType::UPGRADE_MENU);
-		Game::Get().GameClear();
+		Game::Get().StageClear();
 	}
 }
 

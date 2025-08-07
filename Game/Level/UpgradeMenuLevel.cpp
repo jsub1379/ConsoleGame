@@ -11,12 +11,12 @@ UpgradeMenuLevel::UpgradeMenuLevel()
 
 	items.emplace_back(new MenuItem(
 		L"Upgrade speed",
-		[]() { /*작동부 구현*/ }
+		[]() { /*작동부 구현*/Game::Get().MoveToNextStage(); }
 	));
 
 	items.emplace_back(new MenuItem(
 		L"Upgrade damage",
-		[]() {/*작동부 구현*/ }
+		[]() {/*작동부 구현*/ Game::Get().MoveToNextStage(); }
 	));
 
 	// 아이템 수 미리 저장.

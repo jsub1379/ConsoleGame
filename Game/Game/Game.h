@@ -29,9 +29,11 @@ public:
 	static Game& Get();
 
 	void GameStart();
-	void GameClear();
+	void StageClear();
 	void GameEnd();
-	
+	void MoveToNextStage();
+	void SetStageIndex() { ++currentStageIndex; }
+	int GetStageIndex() const { return currentStageIndex; }
 
 private:
 
@@ -48,4 +50,7 @@ private:
 	bool showMenu = false;
 
 	static Game* instance;
+
+	int currentStageIndex = 1;
+
 };

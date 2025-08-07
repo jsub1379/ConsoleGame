@@ -3,6 +3,9 @@
 #include "Level/Level.h"
 #include "Interface/ICanPlayerMove.h"
 
+//현재 스테이지 인덱스
+
+
 class GameLevel : public Level, public ICanPlayerMove
 {
 	RTTI_DECLARATIONS(GameLevel, Level)
@@ -23,6 +26,8 @@ private:
 	// 맵 파일을 읽어서 게임 객체 생성하는 함수.
 	void ReadMapFile(const char* filename);
 
+
+	
 	// 게임 클리어 확인하는 함수.
 	bool checkStageClear();
 	bool checkGameClear();
