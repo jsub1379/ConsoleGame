@@ -63,7 +63,11 @@ namespace Utils
 	{
 		switch (ch)
 		{
-		case 'P': return L"▶";  // 플레이어
+		case 'P': return L"▶";  // 플레이어기본
+		case '>': return L"▶";  // 플레이어 right
+		case '<': return L"◀";  // 플레이어 left
+		case '^': return L"▲";  // 플레이어 up
+		case 'v': return L"▼";  // 플레이어 down
 		case '#': return L"■";  // 벽
 		case '.': return L"·";  // 바닥
 		case 'E': return L"○";  // 적

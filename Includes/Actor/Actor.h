@@ -64,6 +64,9 @@ protected:
 	// 개체의 위치.
 	Vector2 position;
 
+	//개체의 방향
+	
+
 	// 그릴 값.
 	char image = ' ';
 

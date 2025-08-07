@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Engine.h"
 #include "Game/Game.h"
+#include "Utils/Utils.h"
 
 #include "Input.h"
 #include "Level/Level.h"
@@ -59,6 +60,7 @@ void Player::Tick(float deltaTime)
 		{
 			xPosition += xspeed * deltaTime;
 			SetPosition(Vector2((int)xPosition, (int)yPosition));
+			image = '>';
 		}
 	}
 
@@ -70,6 +72,7 @@ void Player::Tick(float deltaTime)
 		{
 			xPosition -= xspeed * deltaTime;
 			SetPosition(Vector2((int)xPosition, (int)yPosition));
+			image = '<';
 		}
 	}
 
@@ -81,6 +84,7 @@ void Player::Tick(float deltaTime)
 		{
 			yPosition -= yspeed * deltaTime;
 			SetPosition(Vector2((int)xPosition, (int)yPosition));
+			image = '^';
 		}
 	}
 
@@ -92,6 +96,7 @@ void Player::Tick(float deltaTime)
 		{
 			yPosition += yspeed * deltaTime;
 			SetPosition(Vector2((int)xPosition, (int)yPosition));
+			image = 'v';
 		}
 	}
 

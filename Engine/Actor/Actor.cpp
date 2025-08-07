@@ -49,6 +49,8 @@ void Actor::Render()
 	//std::cout << image;
 
 }	
+
+
 void Actor::SetPosition(const Vector2& newPosition)
 {
 	//현재는 이동 관련 설정을 player.h에서 하고 있음
